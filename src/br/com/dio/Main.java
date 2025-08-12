@@ -24,11 +24,24 @@ public class Main {
     private final static int BOARD_LIMIT = 9;
 
     public static void main(String[] args) {
-        final var positions = Stream.of(args)
-                .collect(toMap(
-                        k -> k.split(";")[0],
-                        v -> v.split(";")[1]
-                ));
+        final Map<String, String> positions;
+        positions = new java.util.HashMap<>();
+        // Preenche todas as posições com 0,false
+        for (int i = 0; i < BOARD_LIMIT; i++) {
+            for (int j = 0; j < BOARD_LIMIT; j++) {
+                positions.put(j + "," + i, "0,false");
+            }
+        }
+        // Se houver argumentos, sobrescreve as posições informadas
+        if (args.length > 0) {
+            for (String arg : args) {
+                String[] parts = arg.split(";");
+                String[] pos = parts[0].split(",");
+                // formato linha,coluna;valor,fixed -> pos[0]=linha, pos[1]=coluna
+                String key = pos[1] + "," + pos[0]; // coluna,linha
+                positions.put(key, parts[1]);
+            }
+        }
         var option = -1;
         while (true) {
             System.out.println("\n================ SUDOKU ================");
@@ -73,7 +86,8 @@ public class Main {
         for (int i = 0; i < BOARD_LIMIT; i++) {
             spaces.add(new ArrayList<>());
             for (int j = 0; j < BOARD_LIMIT; j++) {
-                var positionConfig = positions.get("%s,%s".formatted(i, j));
+                // Acesso correto: chave coluna,linha
+                var positionConfig = positions.get(j + "," + i);
                 var expected = Integer.parseInt(positionConfig.split(",")[0]);
                 var fixed = Boolean.parseBoolean(positionConfig.split(",")[1]);
                 var currentSpace = new Space(expected, fixed);
@@ -99,10 +113,17 @@ public class Main {
         System.out.printf("Informe o número (1-9) que vai entrar na posição [%s,%s]:\n", col, row);
         var value = runUntilGetValidNumber(1, 9);
 
+        Integer atual = board.getSpaces().get(col).get(row).getActual();
         MoveResultEnum result = board.changeValue(col, row, value);
 
         switch (result) {
-            case SUCCESS -> System.out.println("   ...Número inserido com sucesso!");
+            case SUCCESS -> {
+                if (atual != null && atual.equals(value)) {
+                    System.out.printf(">> Jogada inválida! O número %d já está nesta posição [%d,%d]. <<\n", value, col, row);
+                } else {
+                    System.out.println("   ...Número inserido com sucesso!");
+                }
+            }
             case FIXED_SPACE -> System.out.printf(">> Jogada Inválida! A posição [%d,%d] é fixa e não pode ser alterada. <<\n", col, row);
             case INVALID_MOVE -> System.out.printf(">> Jogada Inválida! O número %d já existe na linha, coluna ou bloco 3x3. <<\n", value);
         }
@@ -133,9 +154,10 @@ public class Main {
 
         var args = new Object[81];
         var argPos = 0;
-        for (int i = 0; i < BOARD_LIMIT; i++) {
-            for (var col : board.getSpaces()) {
-                args[argPos++] = " " + ((isNull(col.get(i).getActual())) ? " " : col.get(i).getActual());
+        for (int row = 0; row < BOARD_LIMIT; row++) {
+            for (int col = 0; col < BOARD_LIMIT; col++) {
+                Integer value = board.getSpaces().get(col).get(row).getActual();
+                args[argPos++] = " " + (isNull(value) ? " " : value);
             }
         }
         System.out.println("Seu jogo se encontra da seguinte forma:");

@@ -43,22 +43,14 @@ public class BoardService {
         for (int i = 0; i < BOARD_LIMIT; i++) {
             spaces.add(new ArrayList<>());
             for (int j = 0; j < BOARD_LIMIT; j++) {
-                var positionConfig = gameConfig.get("%s,%s".formatted(i, j));
+                // Acesso correto: chave coluna,linha
+                var positionConfig = gameConfig.get(j + "," + i);
                 var expected = Integer.parseInt(positionConfig.split(",")[0]);
                 var fixed = Boolean.parseBoolean(positionConfig.split(",")[1]);
                 var currentSpace = new Space(expected, fixed);
                 spaces.get(i).add(currentSpace);
             }
         }
-        
-        List<List<Space>> boardSpaces = new ArrayList<>();
-        for (int col = 0; col < BOARD_LIMIT; col++) {
-            List<Space> colSpaces = new ArrayList<>();
-            for (int row = 0; row < BOARD_LIMIT; row++) {
-                colSpaces.add(spaces.get(row).get(col));
-            }
-            boardSpaces.add(colSpaces);
-        }
-        this.board = new Board(boardSpaces);
+        this.board = new Board(spaces);
     }
 }
