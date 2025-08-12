@@ -2,6 +2,7 @@ package br.com.dio.service;
 
 import br.com.dio.model.Board;
 import br.com.dio.model.GameStatusEnum;
+import br.com.dio.model.MoveResultEnum;
 import br.com.dio.model.Space;
 
 import java.util.ArrayList;
@@ -11,34 +12,37 @@ import java.util.Map;
 public class BoardService {
 
     private final static int BOARD_LIMIT = 9;
-
-    private final Board board;
+    private Board board;
 
     public BoardService(final Map<String, String> gameConfig) {
-        this.board = new Board(initBoard(gameConfig));
+        initBoard(gameConfig);
     }
 
-    public List<List<Space>> getSpaces(){
+    public List<List<Space>> getSpaces() {
         return board.getSpaces();
     }
+    
+    public MoveResultEnum changeValue(int col, int row, int value) {
+        return board.changeValue(col, row, value);
+    }
 
-    public void reset(){
+    public void reset() {
         board.reset();
     }
 
-    public boolean hasErrors(){
+    public boolean hasErrors() {
         return board.hasErrors();
     }
 
-    public GameStatusEnum getStatus(){
+    public GameStatusEnum getStatus() {
         return board.getStatus();
     }
 
-    public boolean gameIsFinished(){
+    public boolean gameIsFinished() {
         return board.gameIsFinished();
     }
 
-    private List<List<Space>> initBoard(final Map<String, String> gameConfig) {
+    private void initBoard(final Map<String, String> gameConfig) {
         List<List<Space>> spaces = new ArrayList<>();
         for (int i = 0; i < BOARD_LIMIT; i++) {
             spaces.add(new ArrayList<>());
@@ -50,7 +54,15 @@ public class BoardService {
                 spaces.get(i).add(currentSpace);
             }
         }
-
-        return spaces;
+        
+        List<List<Space>> boardSpaces = new ArrayList<>();
+        for (int col = 0; col < BOARD_LIMIT; col++) {
+            List<Space> colSpaces = new ArrayList<>();
+            for (int row = 0; row < BOARD_LIMIT; row++) {
+                colSpaces.add(spaces.get(row).get(col));
+            }
+            boardSpaces.add(colSpaces);
+        }
+        this.board = new Board(boardSpaces);
     }
 }
