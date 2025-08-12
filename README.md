@@ -1,3 +1,41 @@
+# 🚀 Execução Local
+
+Se preferir rodar localmente (Windows, Linux ou Mac):
+
+### Pré-requisitos
+- Java 17 instalado
+- Git instalado
+- VS Code (opcional, mas recomendado)
+
+### Compilação manual
+No terminal, execute:
+```bash
+javac -d bin src/br/com/dio/Main.java src/br/com/dio/UIMain.java src/br/com/dio/model/*.java src/br/com/dio/util/*.java src/br/com/dio/service/*.java src/br/com/dio/ui/custom/screen/MainScreen.java src/br/com/dio/ui/custom/panel/*.java src/br/com/dio/ui/custom/frame/*.java src/br/com/dio/ui/custom/input/*.java src/br/com/dio/ui/custom/button/*.java
+```
+
+### Execução via terminal
+```bash
+java -cp bin br.com.dio.Main [argumentos]
+```
+
+### Execução via interface gráfica
+```bash
+java -cp bin br.com.dio.UIMain [argumentos]
+```
+
+### Usando o launch.json (VS Code)
+Basta abrir o VS Code, ir em "Executar e Depurar" e escolher:
+- Sudoku Terminal (Main)
+- Sudoku Interface Gráfica (UIMain)
+
+Os argumentos já estão configurados para o desafio DIO.
+
+### Argumentos para tabuleiro customizado
+Você pode passar os argumentos do desafio diretamente no launch.json ou no terminal, por exemplo:
+```
+0,0;4,false 1,0;7,false 2,0;9,true ... (etc)
+```
+Esses argumentos preenchem o tabuleiro inicial conforme o desafio.
 # Jogo de Sudoku Funcional em Java
 
 ![Java](https://img.shields.io/badge/Java-17-blue)
