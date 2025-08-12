@@ -10,19 +10,7 @@ O desenvolvimento foi realizado em um ambiente na nuvem utilizando **GitHub Code
 
 ---
 
-## 🚀 Demonstração
 
-### Versão Terminal (`main` branch)
-A versão de terminal oferece uma experiência de jogo clássica, com um tabuleiro desenhado em arte ASCII e interação via menus de texto.
-
-**[INSIRA AQUI O GIF DA VERSÃO TERMINAL]**
-
-### Versão com Interface Gráfica (`ui` branch)
-A versão com interface gráfica, construída com Java Swing, oferece uma experiência mais rica, com validação de jogadas em tempo real e feedback visual para o usuário.
-
-**[INSIRA AQUI O GIF DA VERSÃO GRÁFICA]**
-
----
 
 ## ✨ Funcionalidades Implementadas
 
