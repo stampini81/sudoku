@@ -2,7 +2,6 @@ package br.com.dio.ui.custom.screen;
 
 import br.com.dio.model.Space;
 import br.com.dio.service.BoardService;
-import br.com.dio.service.EventEnum;
 import br.com.dio.service.NotifierService;
 import br.com.dio.ui.custom.button.CheckGameStatusButton;
 import br.com.dio.ui.custom.button.FinishGameButton;
@@ -14,7 +13,6 @@ import br.com.dio.ui.custom.panel.SudokuSector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.util.ArrayList;

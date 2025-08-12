@@ -72,8 +72,15 @@ public class NumberText extends JTextField implements EventListener {
 
                     if (result != MoveResultEnum.SUCCESS) {
                         switch (result) {
-                            case FIXED_SPACE -> JOptionPane.showMessageDialog(null, "Jogada Inválida: esta célula é fixa!");
-                            case INVALID_MOVE -> JOptionPane.showMessageDialog(null, "Jogada Inválida: o número já existe na linha, coluna ou bloco.");
+                            case FIXED_SPACE:
+                                JOptionPane.showMessageDialog(null, "Jogada Inválida: esta célula é fixa!");
+                                break;
+                            case INVALID_MOVE:
+                                JOptionPane.showMessageDialog(null, "Jogada Inválida: o número já existe na linha, coluna ou bloco.");
+                                break;
+                            case SUCCESS:
+                                // Este case é necessário para o switch ser completo, mas não fazemos nada aqui.
+                                break;
                         }
                         setText("");
                     }
