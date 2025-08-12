@@ -21,12 +21,8 @@ public class BoardService {
     public List<List<Space>> getSpaces() {
         return board.getSpaces();
     }
-    
-    public MoveResultEnum changeValue(int col, int row, int value) {
-        return board.changeValue(col, row, value);
-    }
 
-    public void reset() {
+    public void reset(){
         board.reset();
     }
 

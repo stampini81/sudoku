@@ -59,33 +59,14 @@ public class NumberText extends JTextField implements EventListener {
                 // Not relevant for plain text fields
             }
 
-            private void changeSpace() {
-                SwingUtilities.invokeLater(() -> {
-                    String text = getText();
-                    if (text.isEmpty()) {
-                        space.clearSpace();
-                        return;
-                    }
-
-                    int value = Integer.parseInt(text);
-                    MoveResultEnum result = boardService.changeValue(col, row, value);
-
-                    if (result != MoveResultEnum.SUCCESS) {
-                        switch (result) {
-                            case FIXED_SPACE:
-                                JOptionPane.showMessageDialog(null, "Jogada Inválida: esta célula é fixa!");
-                                break;
-                            case INVALID_MOVE:
-                                JOptionPane.showMessageDialog(null, "Jogada Inválida: o número já existe na linha, coluna ou bloco.");
-                                break;
-                            case SUCCESS:
-                                // Este case é necessário para o switch ser completo, mas não fazemos nada aqui.
-                                break;
-                        }
-                        setText("");
-                    }
-                });
+            private void changeSpace(){
+                if (getText().isEmpty()){
+                    space.clearSpace();
+                    return;
+                }
+                space.setActual(Integer.parseInt(getText()));
             }
+
         });
     }
 
