@@ -1,5 +1,3 @@
-// Copie e cole todo o código que te passei anteriormente para o Main.java
-// (Aquele que tem o "switch" para tratar o resultado da jogada e as mensagens melhores)
 package br.com.dio;
 
 import br.com.dio.model.Board;

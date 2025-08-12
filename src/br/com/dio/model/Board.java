@@ -1,5 +1,3 @@
-// Copie e cole todo o código que te passei anteriormente para o Board.java
-// (Aquele que tem o método changeValue que retorna MoveResultEnum)
 package br.com.dio.model;
 
 import java.util.Collection;
